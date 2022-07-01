@@ -38,7 +38,8 @@
         "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
         "react/function-component-definition": "off",
         "react/jsx-curly-spacing": [2, "always"],
-        "react/jsx-props-no-spreading": "off"
+        "react/jsx-props-no-spreading": "off",
+        "import/prefer-default-export": "off"
     },
     "settings": {
         "import/resolver": {
