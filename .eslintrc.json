@@ -1,3 +1,48 @@
 {
-  "extends": "next/core-web-vitals"
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "react-hooks",
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "import/no-unresolved": "error",
+        "import/extensions": [
+        "error",
+        "ignorePackages",
+        {
+            "js": "never",
+            "jsx": "never",
+            "ts": "never",
+            "tsx": "never"
+        }
+        ],
+        "object-curly-newline": "off",
+        "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+        "react/function-component-definition": "off",
+        "react/jsx-curly-spacing": [2, "always"],
+        "react/jsx-props-no-spreading": "off"
+    },
+    "settings": {
+        "import/resolver": {
+          "typescript": {}
+        }
+    }
 }
