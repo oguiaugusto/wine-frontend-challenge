@@ -5,7 +5,7 @@ import { IProductsResponse } from '../interfaces/IProduct';
 // Nesse caso, a products.items estaria vazio, caindo no if da função.
 const getProducts = async (page: string | number | string[] = 1) => {
   try {
-    const url = `https://wine-back-test.herokuapp.com/products?page=${page}&limit=10`;
+    const url = `https://wine-back-test.herokuapp.com/products?page=${page}&limit=9`;
 
     const response = await fetch(url);
     const products: IProductsResponse = await response.json();
