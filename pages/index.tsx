@@ -9,7 +9,6 @@ const Home: NextPage = () => (
       <meta name="description" content="Wine products list page" />
       <link rel="icon" href="/favicon.svg" />
     </Head>
-    <div>Home page</div>
   </div>
 );
 
