@@ -1,0 +1,5 @@
+{
+  "presets": ["next/babel"],
+  "plugins": [["styled-components", { "ssr": true }]]
+}
+// Issue: https://stackoverflow.com/questions/66030802/nextjs-not-working-correctly-with-styled-components
