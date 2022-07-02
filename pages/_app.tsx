@@ -1,9 +1,12 @@
 import React from 'react';
 import type { AppProps } from 'next/app';
+import ProductsProvider from '../context/ProductsContext';
 import '../styles/globals.css';
 
-function App({ Component, pageProps }: AppProps) {
-  return <Component { ...pageProps } />;
-}
+const App = ({ Component, pageProps }: AppProps) => (
+  <ProductsProvider>
+    <Component { ...pageProps } />
+  </ProductsProvider>
+);
 
 export default App;
