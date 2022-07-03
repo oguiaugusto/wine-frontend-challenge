@@ -6,7 +6,9 @@ import { IProductsResponse } from '../../interfaces/IProduct';
 import { ProductsContext } from '../../context/ProductsContext';
 import getProducts from '../../utils/getProducts';
 import getPages from '../../utils/getPages';
-import Header from '../../components/Header/Header';
+import ProductCard from '../../components/ProductCard/ProductCard';
+import StyledStorePage from '../../components/StorePage/StyledStorePage';
+import AddToCart from '../../components/AddToCart';
 
 type PageProps = AppProps & { productsResponse: IProductsResponse | null };
 
@@ -26,14 +28,24 @@ const index: NextPage<PageProps> = ({ productsResponse }) => {
     } else {
       router.push('/loja?page=1');
     }
-  }, []);
-
-  const names = productsResponse?.items.map((p) => p.name);
+  }, [productsResponse]);
 
   return (
-    <div>
-      <Header />
-      <p>{ names }</p>
+    <StyledStorePage>
+      <p className="found-products-amount">
+        <span className="amount">{productsResponse?.totalItems}</span>
+        <span>{ ' produtos encontrados' }</span>
+      </p>
+      <div className="products">
+        {
+          c?.products.map((product) => (
+            <div key={ `product-${product.id}` } className="product">
+              <ProductCard product={ product } />
+              <AddToCart />
+            </div>
+          ))
+        }
+      </div>
       <button
         type="button"
         disabled={ previousPageDisabled }
@@ -48,7 +60,7 @@ const index: NextPage<PageProps> = ({ productsResponse }) => {
       >
         Next
       </button>
-    </div>
+    </StyledStorePage>
   );
 };
 

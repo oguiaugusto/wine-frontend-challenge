@@ -10,6 +10,7 @@ const StyledProductCard = styled.div`
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   width: 156px;
+  min-height: 350px;
 
   :hover {
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
@@ -101,6 +102,46 @@ const StyledProductCard = styled.div`
     font-size: 10px;
     align-self: center;
     margin: 8px 0; 
+  }
+
+  @media screen and (min-width: 992px) {
+  
+    width: 256px;
+    min-height: 333px;
+
+    .picture {
+      height: 178px;
+      margin: 10px 29px 0;
+    }
+
+    .picture .label {
+      bottom: 9px;
+      left: unset;
+      right: -10px;
+    }
+      
+    .title {
+      margin: 7px 10px;
+      font-size: 16px;
+    }
+
+    .price .standart {
+      font-size: 11px;
+      width: initial;
+    }
+
+    .price-member .member-wine {
+      color: #1d1d1b;
+    }
+
+    .price-member .member-value {
+      font-size: 23px;
+    }
+
+    .price-non-member {
+      font-size: 12px;
+      margin: 4px 0 10px;
+    }
   }
 `;
 
