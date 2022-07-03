@@ -8,7 +8,7 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const offPercentage = 2;
+  const offPercentage = Math.round((product.discount / product.price) * 100);
 
   return (
     <StyledProductCard>
