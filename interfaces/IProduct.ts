@@ -25,3 +25,14 @@ export interface IProductsResponse {
   totalItems: number;
   items: IProduct[];
 }
+
+export interface IProductCartItem {
+  id: number;
+  image: string;
+  name: string;
+  price: number;
+  discount: number;
+  priceMember: number;
+  priceNonMember: number;
+  quantity: number;
+}

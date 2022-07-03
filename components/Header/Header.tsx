@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import StyledHeader from './StyledHeader';
 import StyledNavBar from './StyledNavBar';
 import StyledSearchBar from './StyledSearchBar';
 import StyledCartIcon from './StyledCartIcon';
+import { ProductsContext } from '../../context/ProductsContext';
 
 type SearchBarState = 'opened' | 'closed' | 'closing';
 
 const Header: React.FC = () => {
+  const c = useContext(ProductsContext);
   const router = useRouter();
   const navLinks = ['Clube', 'Loja', 'Produtores', 'Ofertas', 'Eventos'];
   const [searchBarState, setSearchBarState] = useState<SearchBarState>('closed');
@@ -57,7 +59,11 @@ const Header: React.FC = () => {
         <button type="button" className="cart">
           <img src="/images/wine-box.svg" alt="Ícone de carrinho Wine" className="wine-cart-icon" />
           <div className="cart-items">
-            <p>0</p>
+            <p>
+              {
+                c?.cartItems.reduce((acc, { quantity }) => acc + quantity, 0) || 0
+              }
+            </p>
           </div>
         </button>
       </StyledCartIcon>

@@ -73,7 +73,7 @@ const index: NextPage<PageProps> = ({ productsResponse }) => {
             c?.currentPageProducts.map((product) => (
               <div key={ `product-${product.id}` } className="product">
                 <ProductCard product={ product } />
-                <AddToCart />
+                <AddToCart product={ product } />
               </div>
             ))
           }

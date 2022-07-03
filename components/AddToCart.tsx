@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { ProductsContext } from '../context/ProductsContext';
+import { IProduct } from '../interfaces/IProduct';
 
 const StyledButton = styled.button`
   background-color: #7ebc43;
@@ -27,8 +29,17 @@ const StyledButton = styled.button`
   }
 `;
 
-const AddToCart: React.FC = () => (
-  <StyledButton className="add-to-cart">Adicionar</StyledButton>
-);
+const AddToCart: React.FC<{ product: IProduct }> = ({ product }) => {
+  const c = useContext(ProductsContext);
+
+  return (
+    <StyledButton
+      className="add-to-cart"
+      onClick={ () => c?.addToCart(product) }
+    >
+      Adicionar
+    </StyledButton>
+  );
+};
 
 export default AddToCart;
