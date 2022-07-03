@@ -73,7 +73,8 @@ const StyledSearchBar = styled.div`
 
   @media screen and (min-width: 1212px) {
   
-    right: 370px;
+    right: 335px;
+    margin-bottom: -1px;
     width: 45%;
     max-width: 570px;
 
