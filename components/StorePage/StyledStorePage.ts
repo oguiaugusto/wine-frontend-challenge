@@ -32,6 +32,24 @@ const StyledStorePage = styled.div`
     margin: 8px 0 24px;
   }
 
+  @media screen and (max-width: 374px) {
+
+    .products {
+      justify-content: center;
+    }
+
+    .products .add-to-cart {
+      width: 206px;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+  
+    .products .add-to-cart {
+      width: 206px;
+    }
+  }
+
   @media screen and (min-width: 992px) {
     padding: 39px;
 

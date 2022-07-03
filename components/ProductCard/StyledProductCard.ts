@@ -104,6 +104,16 @@ const StyledProductCard = styled.div`
     margin: 8px 0; 
   }
 
+  @media screen and (max-width: 374px) {
+
+    width: 206px;
+  }
+
+  @media screen and (min-width: 768px) {
+  
+    width: 206px;
+  }
+
   @media screen and (min-width: 992px) {
   
     width: 256px;
