@@ -1,0 +1,55 @@
+@keyframes openSearchBar {
+  0% {
+    opacity: 0;
+    width: 0;
+  }
+  100% {
+    opacity: 1;
+    width: 60%;
+  }
+}
+
+@keyframes openSearchBarInput {
+  0% {
+    padding: 8px 0;
+    border-width: 0;
+  }
+
+  100% {
+    padding: 8px 40px 8px 30px;
+    border-width: 1px;
+  }
+}
+
+@keyframes closeSearchBar {
+  0% {
+    opacity: 1;
+    width: 60%;
+  }
+  100% {
+    opacity: 0;
+    width: 0;
+  }
+}
+
+@keyframes closeSearchBarInput {
+  0% {
+    padding: 8px 40px 8px 30px;
+    border-width: 1px;
+  }
+
+  100% {
+    padding: 8px 0;
+    border-width: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }  
+  100% { opacity: 1; }  
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }  
+  100% { opacity: 0; }  
+}
