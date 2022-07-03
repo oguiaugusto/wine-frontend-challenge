@@ -6,6 +6,7 @@ import { IProductsResponse } from '../../interfaces/IProduct';
 import { ProductsContext } from '../../context/ProductsContext';
 import getProducts from '../../utils/getProducts';
 import getPages from '../../utils/getPages';
+import Header from '../../components/Header/Header';
 
 type PageProps = AppProps & { productsResponse: IProductsResponse | null };
 
@@ -31,6 +32,7 @@ const index: NextPage<PageProps> = ({ productsResponse }) => {
 
   return (
     <div>
+      <Header />
       <p>{ names }</p>
       <button
         type="button"
