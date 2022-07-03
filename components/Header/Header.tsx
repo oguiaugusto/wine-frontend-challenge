@@ -16,7 +16,7 @@ const Header: React.FC = () => {
     if (searchBarState === 'closing') {
       setTimeout(() => {
         setSearchBarState('closed');
-      }, 250);
+      }, 220);
     }
   }, [searchBarState]);
 
@@ -29,23 +29,30 @@ const Header: React.FC = () => {
         <img src="/images/wine-logo-small.svg" alt="Logo Wine Pequena" className="wine-logo-small" />
         <img src="/images/wine-logo.svg" alt="Logo Wine" className="wine-logo-standart" />
       </div>
-      <StyledNavBar className="nav-bar">
+      <StyledNavBar className={ `nav-bar ${searchBarState === 'opened' ? 'nav-bar-off' : 'nav-bar-on'}` }>
         {
           navLinks.map((link, index) => (
-            <p
+            <button
+              type="button"
               key={ `nav-bar-${index + 1}-link` }
               className={ router.pathname.match(new RegExp(`${link}`, 'gi')) ? 'selected-link' : '' }
             >
               {link}
-            </p>
+            </button>
           ))
         }
       </StyledNavBar>
-      <button type="button" className="search-icon" onClick={ () => setSearchBarState('opened') }>
-        <img src="/images/search-icon-small.svg" alt="Ícone de pesquisa" className="search-icon-small" />
-        <img src="/images/search-icon.svg" alt="Ícone de pesquisa com borda arredondada" className="search-icon-standart" />
-      </button>
-      <img src="/images/profile.svg" alt="Ícone da conta" className="profile-icon" />
+      <div className="search-icon">
+        <button type="button" onClick={ () => setSearchBarState('opened') }>
+          <img src="/images/search-icon-small.svg" alt="Ícone de pesquisa" className="search-icon-small" />
+          <img src="/images/search-icon.svg" alt="Ícone de pesquisa com borda arredondada" className="search-icon-standart" />
+        </button>
+      </div>
+      <div className="profile-icon">
+        <button type="button">
+          <img src="/images/profile.svg" alt="Ícone da conta" />
+        </button>
+      </div>
       <StyledCartIcon>
         <button type="button" className="cart">
           <img src="/images/wine-box.svg" alt="Ícone de carrinho Wine" className="wine-cart-icon" />

@@ -36,6 +36,12 @@ const StyledCartIcon = styled.div`
     line-height: 16px;
     color: #00B495;
   }
+
+  @media screen and (min-width: 1212px) {
+
+    justify-content: center;
+    /* padding: 15px 42px; */
+  }
 `;
 
 export default StyledCartIcon;

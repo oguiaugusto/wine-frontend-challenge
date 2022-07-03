@@ -9,19 +9,19 @@ const StyledSearchBar = styled.div`
 
   &.opened {
     display: block;
-    animation: openSearchBar 250ms;
+    animation: openSearchBarSmall 250ms;
   }
 
   &.opened input {
-    animation: openSearchBarInput 250ms;
+    animation: openSearchBarSmallInput 250ms;
   }
 
   &.closing {
-    animation: closeSearchBar 250ms;
+    animation: closeSearchBarSmall 250ms;
   }
 
   &.closing input {
-    animation: closeSearchBarInput 250ms;
+    animation: closeSearchBarSmallInput 250ms;
   }
 
   &.closed {
@@ -69,6 +69,34 @@ const StyledSearchBar = styled.div`
   input:focus {
     outline: none;
     box-shadow: inset 0 0 12px 0 rgb(0, 0, 0, 0.05);
+  }
+
+  @media screen and (min-width: 1212px) {
+  
+    right: 370px;
+    width: 45%;
+    max-width: 570px;
+
+    &.opened {
+      animation: openSearchBarStandart 250ms;
+    }
+
+    &.opened input {
+      animation: openSearchBarStandartInput 250ms;
+    }
+
+    &.closing {
+      animation: closeSearchBarStandart 250ms;
+    }
+
+    &.closing input {
+      animation: closeSearchBarStandartInput 250ms;
+    }
+
+    input {
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
   }
 `;
 
