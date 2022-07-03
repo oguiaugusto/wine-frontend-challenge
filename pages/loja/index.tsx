@@ -1,7 +1,6 @@
-import React, { useContext, useEffect } from 'react';
-import { GetServerSidePropsContext, GetServerSideProps, NextPage } from 'next';
+import React, { useContext, useEffect, useState } from 'react';
+import { NextPage, GetStaticProps } from 'next';
 import { AppProps } from 'next/app';
-import { useRouter } from 'next/router';
 import { IProductsResponse } from '../../interfaces/IProduct';
 import { ProductsContext } from '../../context/ProductsContext';
 import getProducts from '../../utils/getProducts';
@@ -9,26 +8,38 @@ import getPages from '../../utils/getPages';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import StyledStorePage from '../../components/StorePage/StyledStorePage';
 import AddToCart from '../../components/AddToCart';
+import getProductsFromPage from '../../utils/getProductsFromPage';
 
+const PRODUCTS_LIMIT = 9;
 type PageProps = AppProps & { productsResponse: IProductsResponse | null };
 
 const index: NextPage<PageProps> = ({ productsResponse }) => {
   const c = useContext(ProductsContext);
-  const router = useRouter();
-  const [
-    previousPage,
-    nextPage,
-    previousPageDisabled,
-    nextPageDisabled,
-  ] = getPages(productsResponse?.page || 1, productsResponse?.totalPages || 1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [previousPage, nextPage, previousPageDisabled, nextPageDisabled] = getPages(
+    currentPage,
+    Math.ceil((productsResponse?.totalItems || PRODUCTS_LIMIT) / PRODUCTS_LIMIT),
+  );
+
+  useEffect(() => {
+    if (c) {
+      const productsFromPage = getProductsFromPage(c.products, currentPage, PRODUCTS_LIMIT);
+      c?.setCurrentPageProducts(productsFromPage);
+    }
+  }, [currentPage]);
 
   useEffect(() => {
     if (productsResponse) {
-      c?.setProducts(productsResponse?.items);
-    } else {
-      router.push('/loja?page=1');
+      c?.setProducts(productsResponse.items);
+
+      const productsFromPage = getProductsFromPage(
+        productsResponse.items,
+        currentPage,
+        PRODUCTS_LIMIT,
+      );
+      c?.setCurrentPageProducts(productsFromPage);
     }
-  }, [productsResponse]);
+  }, []);
 
   const perPriceFilters = [
     { id: 'unitl-40', from: 0, to: 40, label: 'Até R$40' },
@@ -61,7 +72,7 @@ const index: NextPage<PageProps> = ({ productsResponse }) => {
         </p>
         <div className="products">
           {
-            c?.products.map((product) => (
+            c?.currentPageProducts.map((product) => (
               <div key={ `product-${product.id}` } className="product">
                 <ProductCard product={ product } />
                 <AddToCart />
@@ -72,14 +83,14 @@ const index: NextPage<PageProps> = ({ productsResponse }) => {
         <button
           type="button"
           disabled={ previousPageDisabled }
-          onClick={ () => router.push(`/loja?page=${previousPage}`) }
+          onClick={ () => setCurrentPage(previousPage) }
         >
           Previous
         </button>
         <button
           type="button"
           disabled={ nextPageDisabled }
-          onClick={ () => router.push(`/loja?page=${nextPage}`) }
+          onClick={ () => setCurrentPage(nextPage) }
         >
           Next
         </button>
@@ -88,14 +99,13 @@ const index: NextPage<PageProps> = ({ productsResponse }) => {
   );
 };
 
-const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  const { page = 1 } = context.query;
-
-  const productsResponse = await getProducts(page);
+const getStaticProps: GetStaticProps = async () => {
+  const productsResponse = await getProducts();
   return {
     props: { productsResponse },
+    revalidate: 60 * 10, // 10 min
   };
 };
 
 export default index;
-export { getServerSideProps };
+export { getStaticProps };
